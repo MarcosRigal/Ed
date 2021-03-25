@@ -1,0 +1,5 @@
+/home/marcos/Repositories/University/Ed/P1/i92rigam/build-check_brackets-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/marcos/Repositories/University/Ed/P1/i92rigam/build-check_brackets-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/marcos/Repositories/University/Ed/P1/i92rigam/build-check_brackets-Desktop-Debug/CMakeFiles/test_check_brackets.dir
+/home/marcos/Repositories/University/Ed/P1/i92rigam/build-check_brackets-Desktop-Debug/CMakeFiles/test_stack.dir
+/home/marcos/Repositories/University/Ed/P1/i92rigam/build-check_brackets-Desktop-Debug/CMakeFiles/test_slist.dir

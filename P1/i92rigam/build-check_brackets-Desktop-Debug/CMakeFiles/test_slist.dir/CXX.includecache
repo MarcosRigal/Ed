@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/marcos/Repositories/University/Ed/P1/i92rigam/check_brackets/slist.hpp
+iostream
+-
+sstream
+-
+string
+-
+memory
+-
+stdexcept
+-
+cassert
+-
+
+/home/marcos/Repositories/University/Ed/P1/i92rigam/check_brackets/test_slist.cpp
+stdexcept
+-
+iostream
+-
+fstream
+-
+string
+-
+slist.hpp
+/home/marcos/Repositories/University/Ed/P1/i92rigam/check_brackets/slist.hpp
+
