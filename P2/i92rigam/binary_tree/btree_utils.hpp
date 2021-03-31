@@ -5,6 +5,7 @@
 #include <exception>
 #include <memory>
 #include <iostream>
+#include <queue>
 
 
 #include "btree.hpp"
@@ -80,7 +81,12 @@ prefix_process(typename BTree<T>::Ref tree, Processor& p)
     assert(tree != nullptr);
     bool retVal = true;
 
-    //TODO
+    if(!tree->is_empty())
+    {
+        retVal = p(tree->item());
+        retVal = retVal && prefix_process<T, Processor>(tree->left(), p);
+        retVal = retVal && prefix_process<T, Processor>(tree->right(), p);
+    }
 
     return retVal;
 }
@@ -106,7 +112,12 @@ infix_process(typename BTree<T>::Ref tree, Processor& p)
     assert(tree != nullptr);
     bool retVal = true;
 
-    //TODO
+    if(!tree->is_empty())
+    {
+        retVal = infix_process<T, Processor>(tree->left(), p);
+        retVal = retVal && p(tree->item());
+        retVal = retVal && infix_process<T, Processor>(tree->right(), p);
+    }
 
     return retVal;
 }
@@ -132,7 +143,12 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
     assert(tree != nullptr);
     bool retVal = true;
 
-    //TODO
+    if(!tree->is_empty())
+    {
+        retVal = postfix_process<T, Processor>(tree->left(), p);
+        retVal = retVal && postfix_process<T, Processor>(tree->right(), p);
+        retVal = retVal && p(tree->item());
+    }
 
     return retVal;
 }
@@ -159,8 +175,22 @@ breadth_first_process(typename BTree<T>::Ref tree, Processor& p)
     assert(tree != nullptr);
     bool ret_val = true;
 
-    //TODO
-    //Hint: may be you need to use std::queue
+    typename BTree<T>::Ref subTree;
+    std::queue<typename BTree<T>::Ref> trees;
+
+    trees.push(tree);
+
+    while (!trees.empty() && ret_val)
+    {
+        subTree = trees.front();
+        if(!subTree->is_empty())
+        {
+            ret_val = p(subTree->item());
+            trees.push(subTree->left());
+            trees.push(subTree->right());
+        }
+        trees.pop();
+    }
 
     return ret_val;
 }
@@ -179,10 +209,36 @@ bool check_btree_in_order(typename BTree<T>::Ref const& tree)
 {
     bool ret_val = true;
 
-    //TODO
-
-
-    //
+    if(!tree->is_empty()){
+        if (!tree->right()->is_empty())
+        {
+            auto minRightNode = tree->right();
+            while(!minRightNode->left()->is_empty())
+            {
+                minRightNode = minRightNode->left();
+            }
+            if (minRightNode->item() < tree->item())
+            {
+                ret_val = false;
+            }
+        }
+        if(!tree->left()->is_empty())
+        {
+            auto maxLeftNode = tree->left();
+            while(!maxLeftNode->right()->is_empty())
+            {
+                maxLeftNode = maxLeftNode->right();
+            }
+            if (maxLeftNode->item() > tree->item())
+            {
+                ret_val = false;
+            }
+        }
+        if(!check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
+        {
+            ret_val = false;
+        }
+    }
 
     return ret_val;
 }
@@ -203,10 +259,21 @@ bool has_in_order(typename BTree<T>::Ref tree, T const& v)
     assert(check_btree_in_order<T>(tree));
     bool ret_val = false;
 
-    //TODO
-
-
-    //
+    if(!tree->is_empty())
+    {
+        if(v < tree->item())
+        {
+            ret_val = has_in_order(tree->left(), v);
+        }
+        else if(v > tree->item())
+        {
+            ret_val = has_in_order(tree->right(), v);
+        }
+        else
+        {
+            ret_val = true;
+        }
+    }
 
     return ret_val;
 }
@@ -227,10 +294,32 @@ void insert_in_order(typename BTree<T>::Ref tree, T const& v)
 {
     assert(check_btree_in_order<T>(tree));
 
-    //TODO
-
-
-    //
+    if(tree->is_empty())
+    {
+        tree->create_root(v);
+    }
+    else if(v < tree->item())
+    {
+        if(tree->left()->is_empty())
+        {
+            tree->set_left(BTree<T>::create(v));
+        }
+        else
+        {
+            insert_in_order(tree->left(), v);
+        }
+    }
+    else if(v > tree->item())
+    {
+        if(tree->right()->is_empty())
+        {
+            tree->set_right(BTree<T>::create(v));
+        }
+        else
+        {
+            insert_in_order(tree->right(), v);
+        }
+    }
 
     assert(has_in_order<T>(tree, v));
 }

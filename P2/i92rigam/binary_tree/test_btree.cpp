@@ -111,10 +111,10 @@ main(int argc, const char* argv[])
                         return EXIT_FAILURE;
                     }
                     size_t count=0;
-                    auto p = [v, &count](int item) { ++count; return v != item;};
+                    auto p = [v, &count](int item) { ++count; return v != item;};                   
                     std::cout << "Has (prefix search): " << v << "?: "
-                              << (prefix_process<int>(tree, p) ? 'N' : 'Y')
-                              << ". Processed " << count << " nodes."
+                              << (prefix_process<int>(tree, p) ? 'N' : 'Y');
+                    std::cout << ". Processed " << count << " nodes."
                               << std::endl;
                 }
                 else if (command == "INFIX_SEARCH")
@@ -130,8 +130,8 @@ main(int argc, const char* argv[])
                     size_t count=0;
                     auto p = [v, &count](int item) { ++count; return v != item;};
                     std::cout << "Has (infix search): " << v << "?: "
-                              << (infix_process<int>(tree, p) ? 'N' : 'Y')
-                              << ". Processed " << count << " nodes."
+                              << (infix_process<int>(tree, p) ? 'N' : 'Y');
+                    std::cout << ". Processed " << count << " nodes."
                               << std::endl;
                 }
                 else if (command == "POSTFIX_SEARCH")
@@ -147,8 +147,8 @@ main(int argc, const char* argv[])
                     size_t count = 0;
                     auto p = [v, &count](int item) { ++count; return v != item;};
                     std::cout << "Has (postfix search): " << v << "?: "
-                              << (postfix_process<int>(tree, p) ? 'N' : 'Y')
-                              << ". Processed " << count << " nodes."
+                              << (postfix_process<int>(tree, p) ? 'N' : 'Y');
+                    std::cout << ". Processed " << count << " nodes."
                               << std::endl;
                 }
                 else if (command == "BREADTH_FIRST_SEARCH")
@@ -164,8 +164,8 @@ main(int argc, const char* argv[])
                     size_t count = 0;
                     auto p = [v, &count](int item) {++count; return v != item;};
                     std::cout << "Has (breadth first search): " << v << "?: "
-                              << (breadth_first_process<int>(tree, p)?'N':'Y')
-                              << ". Processed " << count << " nodes."
+                              << (breadth_first_process<int>(tree, p)?'N':'Y');
+                    std::cout << ". Processed " << count << " nodes."
                               << std::endl;
                 }
                 else if (command == "CHECK_IN_ORDER")

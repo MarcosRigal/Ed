@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2021-03-25T13:41:36. -->
+<!-- Written by QtCreator 4.11.0, 2021-03-31T17:25:37. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -227,7 +227,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Z</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">.</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.test_btree</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_btree</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -303,10 +303,10 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P2/i92rigam/binary_tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Binary_Tree_Test</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Inorder</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
-    <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P2/i92rigam/build-binary_tree-Desktop-Debug/test_btree tests_btree/</value>
+    <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P2/i92rigam/build-binary_tree-Desktop-Debug/test_btree tests_inorder/</value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
@@ -378,10 +378,10 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P2/i92rigam/binary_tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Inorder_Test</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">BTree</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
-    <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P2/i92rigam/build-binary_tree-Desktop-Debug/test_btree tests_inorder/</value>
+    <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P2/i92rigam/build-binary_tree-Desktop-Debug/test_btree tests_btree/</value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
@@ -453,7 +453,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P2/i92rigam/binary_tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Traversals_Test</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Traversals</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
     <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P2/i92rigam/build-binary_tree-Desktop-Debug/test_btree tests_traversals/</value>
