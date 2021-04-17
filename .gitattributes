@@ -1,6 +1,6 @@
 *.css linguist-detectable=false
 *.js linguist-detectable=false
 *.html linguist-detectable=false
-*makefile linguist-detectable=false
-*cMake linguist-detectable=false
+*Makefile linguist-detectable=false
+*CMake linguist-detectable=false
 *.c linguist-detectable=true
