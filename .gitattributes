@@ -4,6 +4,7 @@
 *Makefile linguist-detectable=false
 *make linguist-detectable=false
 *cmake linguist-detectable=false
+*sh linguist-detectable=false
 *txt linguist-detectable=false
 *TXT linguist-detectable=false
 *.c linguist-detectable=false
