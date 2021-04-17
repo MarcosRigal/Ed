@@ -2,5 +2,7 @@
 *.js linguist-detectable=false
 *.html linguist-detectable=false
 *Makefile linguist-detectable=false
-*CMake linguist-detectable=false
-*.c linguist-detectable=true
+*cmake linguist-detectable=false
+*txt linguist-detectable=false
+*.cpp linguist-detectable=true
+*.c linguist-detectable=false
