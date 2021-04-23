@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2021-04-09T12:43:52. -->
+<!-- Written by QtCreator 4.11.0, 2021-04-23T18:46:53. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -227,7 +227,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">.</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_avltnode</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.test_avltnode</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_avltnode</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -302,7 +302,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">..</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_avltree</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.test_avltree</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_avltree</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -377,10 +377,10 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">...</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_bstree</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.test_bstree</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_bstree</value>
-    <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/test_bstree tests_bstree</value>
+    <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
@@ -453,7 +453,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P3/i92rigam/avl-tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Test AVL Node</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Node</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
     <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/test_avltnode tests_avltnode</value>
@@ -528,7 +528,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P3/i92rigam/avl-tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Test AVL Tree</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">AVLTree</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
     <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/test_avltree tests_avltree</value>
@@ -603,7 +603,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">/home/marcos/Repositories/University/Ed/P3/i92rigam/avl-tree/run_tests.sh</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Test BS Tree</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">BSTree</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
     <value type="QString" key="RunConfiguration.Arguments">/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/test_bstree tests_bstree</value>
