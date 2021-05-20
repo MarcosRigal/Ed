@@ -54,19 +54,3 @@ sstream
 string
 -
 
-/home/marcos/Repositories/University/Ed/P5/i92rigam/dos_detector/test_dos_detector.cpp
-iostream
--
-fstream
--
-vector
--
-exception
--
-ip_utils.hpp
-/home/marcos/Repositories/University/Ed/P5/i92rigam/dos_detector/ip_utils.hpp
-hash_table.hpp
-/home/marcos/Repositories/University/Ed/P5/i92rigam/dos_detector/hash_table.hpp
-dos_detector.hpp
-/home/marcos/Repositories/University/Ed/P5/i92rigam/dos_detector/dos_detector.hpp
-

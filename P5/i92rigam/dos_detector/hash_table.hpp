@@ -32,7 +32,16 @@ public:
     HashTable(size_t m, uint64_t a=32, uint64_t b=3, uint64_t p=4294967311l,
               keyToInt key_to_int=keyToInt())
     {
-        //TODO
+        a_ = a;
+        b_ = b;
+        p_ = p;
+        m_ = m;
+
+        hash_table_.resize(m);
+        num_of_valid_keys_ = 0;
+        current_it_ = hash_table_[0].begin();
+        indice_current_ = 0;
+        key_to_int_ = key_to_int;
 
         assert(is_empty());
         assert(!is_valid());
@@ -48,8 +57,9 @@ public:
      */
     bool is_empty()
     {
-        //TODO
-        return true;
+        bool is_empty;
+        (num_of_valid_keys_ == 0) ? (is_empty = true) : (is_empty = false);
+        return  is_empty;
     }
 
     /**
@@ -58,8 +68,20 @@ public:
      */
     bool is_valid() const
     {
-        //TODO
-        return false;
+        bool is_valid = false;
+
+        if(indice_current_ != hash_table_.size())
+        {
+            for(auto i = hash_table_[indice_current_].begin(); i != hash_table_[indice_current_].end() && is_valid == false; i++)
+            {
+                if(i == current_it_)
+                {
+                    is_valid = true;
+                }
+            }
+        }
+
+        return is_valid;
     }
 
     /**
@@ -68,8 +90,7 @@ public:
      */
     size_t num_of_valid_keys() const
     {
-        //TODO
-        return 0;
+        return num_of_valid_keys_;
     }
 
     /**
@@ -78,8 +99,7 @@ public:
      */
     float load_factor() const
     {
-        //TODO
-        return -1.0;
+        return num_of_valid_keys_ / m_;
     }
 
     /**
@@ -90,10 +110,17 @@ public:
      */
     bool has(K const& k) const
     {
-        //TODO
-        //You can use find() but
-        //you must remenber to restore the cursor at the end.
-        return false;
+        bool has = false;
+        auto key = hash(key_to_int_(k));
+
+        for (auto i = hash_table_[key].begin(); i != hash_table_[key].end() && has == false; i++)
+        {
+            if(i->first == k)
+            {
+                has = true;
+            }
+        }
+        return has;
     }
 
 
@@ -104,8 +131,7 @@ public:
     K const& get_key() const
     {
         assert(is_valid());
-        //TODO
-        return K();
+        return current_it_->first;
     }
 
     /**
@@ -115,8 +141,7 @@ public:
     V const& get_value() const
     {
         assert(is_valid());
-        //TODO
-        return V();
+        return current_it_->second;
     }
 
     /**
@@ -126,8 +151,7 @@ public:
     size_t
     hash(uint64_t k) const
     {
-        //TODO
-        return 0;
+        return ((((k * a_) + b_) % p_) % m_);
     }
 
     /** @}*/
@@ -141,15 +165,22 @@ public:
      * @post !is_valid() or get_key()==k
      */
     bool find(K const& k)
-    {        
+    {
         bool is_found=false;
 
-        //TODO
-        //1. hash the key to get the table entry.
-        //2. Is the table entry empty
-        //2.1 yes, not found
-        //2.2 else find into the chain (list) of the entry.
-        // !!Remenber to update the cursor state.
+        if(!is_empty())
+        {
+            auto key = hash(key_to_int_(k));
+            for (auto i = hash_table_[key].begin(); i != hash_table_[key].end() && is_found != true; i++)
+            {
+                if(i->first == k)
+                {
+                    indice_current_ = key;
+                    current_it_ = i;
+                    is_found = true;
+                }
+            }
+        }
 
         return is_found;
     }
@@ -168,11 +199,22 @@ public:
         bool old_has = has(k);
         size_t old_num_of_valid_keys = num_of_valid_keys();
 #endif
-        //TODO
-        //1. find the key.
-        //2.1 if it is found, reset the value part.
-        //2.2 else, add the new pair (key,value) to the entry chain.
-        //Remenber to update the cursor state and the valid keys counter.
+
+        if(find(k) == true)
+        {
+            set_value(v);
+        }
+        else
+        {
+            indice_current_ = hash(key_to_int_(k));
+            hash_table_[indice_current_].push_front(std::make_pair(k,v));
+            num_of_valid_keys_++;
+            current_it_ = hash_table_[indice_current_].begin();
+            if(load_factor() > 0.9)
+            {
+                rehash();
+            }
+        }
 
         assert(is_valid());
         assert(get_key()==k);
@@ -192,20 +234,16 @@ public:
         assert(is_valid());
 #ifndef NDEBUG //In Relase mode this macro is defined.
         size_t old_n_valid_keys = num_of_valid_keys();
-#endif        
+#endif
 
-        //TODO
-        //First save the current cursor state.
-
-        //
+        auto indice_current_aux = indice_current_;
+        auto current_it_aux = current_it_;
 
         goto_next(); //move the cursor to next position.
-          
-        //TODO
-        //Second, remove the old cursor position.
 
-        //
-        
+        hash_table_[indice_current_aux].erase(current_it_aux);
+        num_of_valid_keys_--;
+
         assert( (num_of_valid_keys()+1)==old_n_valid_keys );
         return;
     }
@@ -216,7 +254,7 @@ public:
     void set_value(const V& v)
     {
         assert(is_valid());
-        //TODO
+        current_it_->second = v;
     }
 
     /**
@@ -236,37 +274,26 @@ public:
             old_value = get_value();
         }
 #endif
-        //1. Save the state of the cursor.
 
-        //2. Pick up at random a new h.
-        uint64_t P = /*TODO use here the coefficiente P used for the hash function.*/ 0;
+        auto auxiliar_key = current_it_->first;
+
+        uint64_t P = p_;
         const uint64_t a = 1 + static_cast<uint64_t>(std::rand()/(RAND_MAX+1.0) * static_cast<double>(P-1));
         const uint64_t b = static_cast<uint64_t>(std::rand()/(RAND_MAX+1.0) * static_cast<double>(P));
 
-        //3. Create a new table with double size with the new hash.
-        size_t M = /*TODO use the current table size.*/ 0;
+        size_t M = m_;
         HashTable<K, V, keyToInt> new_table (M*2, a, b);
 
-        //TODO
-        //4. Traversal the old table inserting the values into the new.
-        //4.1 goto to the first entry.
-        //4.2 while isValid() do
-        //4.3    insert in new table current pair key,value
-        //4.4    goto next entry.
+        goto_begin();
+        while (is_valid())
+        {
+            new_table.insert(get_key(),get_value());
+            goto_next();
+        }
 
-
-        //TODO
-        //5 commute the new_table with this.
-        //THIS DEPENDS ON YOUR IMPLEMENTATION.
-        //CHECK CAREFULY IF YOU NEED OR NOT TO
-        //OVERLOAD THE ASSIGN OPERATOR.
         (*this) = new_table;
 
-        //TODO
-        //6. Before returning, the cursor must be restored
-        //to the same state that old state.
-        //
-
+        find(auxiliar_key);
 
         //post condition
         assert(!old_is_valid || (is_valid() && old_key==get_key() && old_value==get_value()));
@@ -278,7 +305,17 @@ public:
      */
     void goto_begin()
     {
-        //TODO
+
+        for (size_t i = 0; i < hash_table_.size(); i++)
+        {
+            if(!hash_table_[i].empty())
+            {
+                current_it_ = hash_table_[i].begin();
+                indice_current_ = i;
+                break;
+            }
+        }
+
         assert(is_empty() || is_valid());
     }
 
@@ -289,17 +326,42 @@ public:
     void goto_next()
     {
         assert(is_valid());
-        //TODO
+
+        current_it_++;
+
+        if(current_it_ == hash_table_[indice_current_].end())
+        {
+            size_t i = indice_current_ + 1;
+            while(i < hash_table_.size() && hash_table_[i].empty())
+            {
+                i++;
+            }
+            if(i < hash_table_.size() && !hash_table_[i].empty())
+            {
+                current_it_ = hash_table_[i].begin();
+                indice_current_ = i;
+                assert(is_valid());
+            }
+            else
+            {
+                indice_current_ = hash_table_.size();
+            }
+        }
+
     }
     /** @} */
 
 protected:
 
-    //TODO
-    //Care must be taken about the type of the attributes.
-    //It is recommended to use types that not imply to overload
-    //the assign operator used in the rehash method.
-
+    std::vector<std::list<std::pair<K, V>>> hash_table_;
+    size_t m_;
+    keyToInt key_to_int_;
+    uint64_t a_;
+    uint64_t b_;
+    uint64_t p_;
+    size_t indice_current_;
+    typename std::list<std::pair<K, V>>::iterator current_it_;
+    size_t num_of_valid_keys_;
 };
 
 #endif
