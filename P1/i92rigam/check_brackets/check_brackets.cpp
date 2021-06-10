@@ -83,5 +83,3 @@ check_brackets(std::istream& input)
 
     return ret_val;
 }
-
-

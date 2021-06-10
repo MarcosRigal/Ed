@@ -29,7 +29,7 @@ public:
      */
     SNode (T const& it)
     {
-        item_ = it;
+        it_ = it;
         next_ = nullptr;
         assert(!has_next());
     }
@@ -37,7 +37,7 @@ public:
     /** @brief Create an empty Stack.*/
     SNode (T const& it, SNode<T>::Ref& next)
     {
-        item_ = it;
+        it_ = it;
         next_ = next;
     }
 
@@ -55,7 +55,7 @@ public:
     /** @brief Destroy a SNode.**/
     ~SNode()
     {
-        //I think we don't need destructor
+        //TODO: think if it is needed.
     }
     /** @}*/
 
@@ -65,7 +65,7 @@ public:
     /** @brief Get the data item.*/
     const T& item() const
     {
-        return item_;
+        return it_;
     }
 
     /**
@@ -91,18 +91,18 @@ public:
     /** @brief Set the data item.*/
     void set_item(const T& new_it)
     {
-        item_ = new_it;
+        it_=new_it;
     }
 
     /** @brief Set the link to the next node.*/
     void set_next(SNode<T>::Ref next)
     {
-        next_ = next;
+        next_=next;
     }
 
 protected:
 
-    T item_;
+    T it_;
     SNode<T>::Ref next_;
 };
 
@@ -131,6 +131,8 @@ class SList
   SList ()
   {
       head_=nullptr;
+      current_=nullptr;
+      previous_=nullptr;
       assert(is_empty());
   }
 
@@ -159,26 +161,24 @@ class SList
    * @return A shared referente to the new slist.
    */
   static typename SList<T>::Ref create(std::istream& in) noexcept(false)
-  {      
+  {
       auto list = SList<T>::create();
-
       auto reversed_list = SList<T>::create();
+      T new_item;
       std::string input;
 
       in >> input;
-
-      T new_item;
 
       if(input != "[]")
       {
           if(input != "[")
           {
-              throw std::runtime_error("Wrong input format.");
+              throw std::runtime_error("Wrong input format");
           }
           while (in >> input && input != "]")
           {
               std::istringstream inputstream(input);
-              inputstream >> new_item;
+              inputstream>>new_item;
               reversed_list->push_front(new_item);
           }
           while (!reversed_list->is_empty())
@@ -188,7 +188,7 @@ class SList
           }
           if(input != "]")
           {
-              throw std::runtime_error("Wrong input format.");
+              throw std::runtime_error("Wrong input format");
           }
       }
 
@@ -204,9 +204,7 @@ class SList
   /** @brief is the list empty?.*/
   bool is_empty () const
   {
-
-      return head_ == nullptr;
-
+      return head_==nullptr;
   }
 
   /**
@@ -216,9 +214,7 @@ class SList
   const T& front() const
   {
       assert(!is_empty());
-
       return head_->item();
-
   }
 
   /** @brief get the current item.
@@ -227,9 +223,7 @@ class SList
   const T& current() const
   {
       assert(! is_empty());
-
       return current_->item();
-
   }
 
   /**
@@ -240,9 +234,7 @@ class SList
   bool has_next() const
   {
       assert(!is_empty());
-
-      return current_->next() != nullptr;
-
+      return current_->next()!=nullptr;
   }
 
   /**
@@ -253,9 +245,7 @@ class SList
   T const& next() const
   {
       assert(has_next());
-
       return current_->next()->item();
-
   }
 
 
@@ -266,26 +256,20 @@ class SList
    */
   bool has(T const& it) const
   {
-      bool exists = false;
-
-      if(!is_empty() && !exists)
+      bool exist = false;
+      if(!is_empty())
       {
-          typename SNode<T>::Ref iterator = head_;
-          if(iterator->item() == it)
+          typename SNode<T>::Ref iter = head_;
+          while (iter!=nullptr && !exist)
           {
-              exists = true;
-          }
-          while (iterator->has_next())
-          {
-              iterator = iterator->next();
-              if(iterator->item() == it)
-              {
-                  exists = true;
-              }
+            if(iter->item()==it)
+            {
+                exist=true;
+            }
+            iter = iter->next();
           }
       }
-
-      return exists;
+      return exist;
   }
 
   /**
@@ -301,19 +285,19 @@ class SList
   void fold(std::ostream& out) const
   {
       out << "[";
-      typename SNode<T>::Ref iterator = head_;
-      if(iterator != nullptr)
+      if(!is_empty())
       {
-          out << " " << iterator->item();
-          while (iterator->has_next())
-          {
-            iterator = iterator->next();
-            out << " " << iterator->item();
-          }
-          out << " ";
+        typename SNode<T>::Ref iter = head_;
+        while (iter!=nullptr)
+        {
+              out << " " << iter->item();
+              iter=iter->next();
+        }
+        out << " ";
       }
       out << "]";
   }
+
 
   /**@}*/
 
@@ -330,9 +314,7 @@ class SList
   void set_current(T const& new_v)
   {
       assert(!is_empty());
-
       current_->set_item(new_v);
-
       assert(current()==new_v);
   }
 
@@ -344,14 +326,12 @@ class SList
    */
   void push_front(T const& new_it)
   {
-
       auto new_node = SNode<T>::create(new_it, head_);
       if(current_ == head_)
       {
           current_ = new_node;
       }
       head_ = new_node;
-
       assert(front()==new_it);
   }
 
@@ -373,14 +353,11 @@ class SList
 
       if(is_empty())
       {
-          push_front(new_it);
-          previous_ = nullptr;
-          current_ = head_;
+           push_front(new_it);
       }
       else
       {
           auto new_node = SNode<T>::create(new_it, current_->next());
-          new_node->set_item(new_it);
           current_->set_next(new_node);
       }
 
@@ -396,11 +373,11 @@ class SList
   void pop_front()
   {
       assert(!is_empty());
-      if(current_ == head_)
+      if(current_==head_)
       {
-          current_ = current_->next();
+          current_=current_->next();
       }
-      head_ = head_->next();
+      head_=head_->next();
   }
 
 
@@ -420,18 +397,16 @@ class SList
           old_next=next();
 #endif
 
-      if(current_ == head_)
+      if(current_==head_)
       {
           pop_front();
-          previous_ = nullptr;
-          current_ = head_;
       }
       else
       {
           if(current_->has_next())
           {
               previous_->set_next(current_->next());
-              current_ = current_->next();
+              current_=current_->next();
           }
           else
           {
@@ -450,14 +425,12 @@ class SList
    */
   void goto_next()
   {
-      assert(has_next());      
+      assert(has_next());
 #ifndef NDEBUG
       auto old_next = next();
 #endif
-
-      previous_ = current_;
-      current_ = current_->next();
-
+      previous_=current_;
+      current_=current_->next();
       assert(current()==old_next);
   }
 
@@ -469,10 +442,8 @@ class SList
   void goto_first()
   {
       assert(!is_empty());
-
-      previous_ = nullptr;
-      current_ = head_;
-
+      previous_=nullptr;
+      current_=head_;
       assert(current()==front());
   }
 
@@ -489,27 +460,20 @@ class SList
   {
       assert(!is_empty());
       bool found = false;
-
-      previous_ = nullptr;
-      current_ = head_;
-
-      while (current_->has_next() && !found)
+      current_=head_;
+      do
       {
-          if(current_->item() == it)
+          if(current_->item()==it)
           {
-              found = true;
+              found=true;
           }
-          else if (!found)
+          else
           {
-              previous_ = current_;
-              current_ = current_->next();
+              previous_=current_;
+              current_=current_->next();
           }
-      }
+      }while (current_->has_next() && !found);
 
-      if(current_->item() == it)
-      {
-          found = true;
-      }
 
       assert(!found || current()==it);
       assert(found || !has_next());
@@ -553,7 +517,6 @@ protected:
   typename SNode<T>::Ref head_;
   typename SNode<T>::Ref previous_;
   typename SNode<T>::Ref current_;
-
 };
 
 #endif //ED_SList

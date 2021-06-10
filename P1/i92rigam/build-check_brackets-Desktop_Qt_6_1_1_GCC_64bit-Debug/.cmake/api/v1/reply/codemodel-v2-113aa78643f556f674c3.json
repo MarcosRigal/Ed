@@ -1,0 +1,77 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "check_brackets",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_check_brackets::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_check_brackets-Debug-c0ab25d00db00e036a6a.json",
+					"name" : "test_check_brackets",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_slist::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_slist-Debug-aa1ce583bdb5a190bc76.json",
+					"name" : "test_slist",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_stack::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_stack-Debug-e58f50ed0757cde702de.json",
+					"name" : "test_stack",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/marcos/Desktop/Practicas_ED/check_brackets/i92rigam/build-check_brackets-Desktop_Qt_6_1_1_GCC_64bit-Debug",
+		"source" : "/home/marcos/Desktop/Practicas_ED/check_brackets/i92rigam/check_brackets"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

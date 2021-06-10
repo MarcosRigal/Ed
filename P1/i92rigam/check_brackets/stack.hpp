@@ -105,6 +105,7 @@ class Stack
   void push(const T& new_it)
   {
       list_.push_front(new_it);
+
       assert(top()==new_it);
   }
 
