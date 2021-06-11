@@ -119,7 +119,7 @@ public:
     }
 
 protected:
-    
+
     T item_;
     typename BTNode<T>::Ref rightNode_;
     typename BTNode<T>::Ref leftNode_;
@@ -150,7 +150,7 @@ class BTree
      */
     BTree ()
     {
-        
+
     }
 
   /** @brief Create Leaf BTree.
@@ -201,7 +201,7 @@ class BTree
       in >> token;
       if (!in)
           throw std::runtime_error("Wrong input format.");
-       
+
       T new_item;
 
       if(token != "[]")
@@ -240,7 +240,7 @@ class BTree
   T const& item() const
   {
       assert(!is_empty());
-      
+
       return root_->item();
   }
 
@@ -256,7 +256,7 @@ class BTree
 
       auto leftTree = BTree<T>::create();
 
-      leftTree->root_ = root_->left(); 
+      leftTree->root_ = root_->left();
 
       l_subtree = leftTree;
 
@@ -266,7 +266,7 @@ class BTree
   /**
    * @brief Get the right subtree.
    * @return a reference to the right subtree.
-   * @pre !is_empty()   
+   * @pre !is_empty()
    */
   typename BTree<T>::Ref right() const
   {
@@ -275,7 +275,7 @@ class BTree
 
       auto rightTree = BTree<T>::create();
 
-      rightTree->root_ = root_->right(); 
+      rightTree->root_ = root_->right();
 
       r_subtree = rightTree;
 
@@ -300,20 +300,16 @@ class BTree
   std::ostream& fold(std::ostream& out) const
   {
       out << "[";
-      
+
       if(!is_empty())
       {
           out << " " << root_->item() << " ";
-          auto leftTree = BTree<T>::create();
-          leftTree->root_ = root_->left(); 
-          leftTree->fold(out);
+          left()->fold(out);
           out << " ";
-          auto rightTree = BTree<T>::create();
-          rightTree->root_ = root_->right(); 
-          rightTree->fold(out);
+          right()->fold(out);
           out << " ";
       }
-      
+
       out << "]";
 
       return out;
@@ -364,7 +360,7 @@ class BTree
   void set_left(typename BTree<T>::Ref new_left)
   {
       assert(!is_empty());
-      
+
       root_->set_left(new_left->root_);
   }
 

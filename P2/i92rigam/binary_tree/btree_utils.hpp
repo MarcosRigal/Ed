@@ -24,16 +24,17 @@ int compute_height (typename BTree<T>::Ref t)
 {
     assert(t != nullptr);
     int ret_val = -1;
-    
+
     if (!t->is_empty())
     {
         int left = compute_height<T>(t->left()) + 1;
         int right = compute_height<T>(t->right()) + 1;
         (left >= right) ? ret_val = left : ret_val = right;
     }
-    
+
     return ret_val;
 }
+
 
 /**
  * @brief Compute the number of nodes in the tree.
@@ -60,6 +61,7 @@ size_t compute_size (typename BTree<T>::Ref t)
     return ret_val;
 }
 
+
 /**
  * @brief Prefix processing of a binary tree
  * The template class Processor must have an closure interface:
@@ -83,7 +85,7 @@ prefix_process(typename BTree<T>::Ref tree, Processor& p)
 
     if(!tree->is_empty())
     {
-        retVal = p(tree->item());
+        retVal = retVal && p(tree->item());
         retVal = retVal && prefix_process<T, Processor>(tree->left(), p);
         retVal = retVal && prefix_process<T, Processor>(tree->right(), p);
     }
@@ -114,7 +116,7 @@ infix_process(typename BTree<T>::Ref tree, Processor& p)
 
     if(!tree->is_empty())
     {
-        retVal = infix_process<T, Processor>(tree->left(), p);
+        retVal = retVal && infix_process<T, Processor>(tree->left(), p);
         retVal = retVal && p(tree->item());
         retVal = retVal && infix_process<T, Processor>(tree->right(), p);
     }
@@ -145,7 +147,7 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
 
     if(!tree->is_empty())
     {
-        retVal = postfix_process<T, Processor>(tree->left(), p);
+        retVal = retVal && postfix_process<T, Processor>(tree->left(), p);
         retVal = retVal && postfix_process<T, Processor>(tree->right(), p);
         retVal = retVal && p(tree->item());
     }
@@ -175,19 +177,18 @@ breadth_first_process(typename BTree<T>::Ref tree, Processor& p)
     assert(tree != nullptr);
     bool ret_val = true;
 
-    typename BTree<T>::Ref subTree;
+    typename BTree<T>::Ref subtree;
     std::queue<typename BTree<T>::Ref> trees;
-
     trees.push(tree);
 
     while (!trees.empty() && ret_val)
     {
-        subTree = trees.front();
-        if(!subTree->is_empty())
+        subtree = trees.front();
+        if(!subtree->is_empty())
         {
-            ret_val = p(subTree->item());
-            trees.push(subTree->left());
-            trees.push(subTree->right());
+            ret_val = p(subtree->item());
+            trees.push(subtree->left());
+            trees.push(subtree->right());
         }
         trees.pop();
     }
@@ -209,29 +210,30 @@ bool check_btree_in_order(typename BTree<T>::Ref const& tree)
 {
     bool ret_val = true;
 
-    if(!tree->is_empty()){
-        if (!tree->right()->is_empty())
+    if(!tree->is_empty())
+    {
+        if(!tree->right()->is_empty())
         {
-            auto minRightNode = tree->right();
-            while(!minRightNode->left()->is_empty())
+            auto minRight = tree->right();
+            while (!minRight->left()->is_empty())
             {
-                minRightNode = minRightNode->left();
+                minRight = minRight->left();
             }
-            if (minRightNode->item() < tree->item())
+            if(minRight->item()<= tree->item())
             {
-                ret_val = false;
+                ret_val=false;
             }
         }
         if(!tree->left()->is_empty())
         {
-            auto maxLeftNode = tree->left();
-            while(!maxLeftNode->right()->is_empty())
+            auto maxleft = tree->left();
+            while (!maxleft->right()->is_empty())
             {
-                maxLeftNode = maxLeftNode->right();
+                maxleft = maxleft->right();
             }
-            if (maxLeftNode->item() > tree->item())
+            if(maxleft->item()>= tree->item())
             {
-                ret_val = false;
+                ret_val=false;
             }
         }
         if(!check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
@@ -263,15 +265,15 @@ bool has_in_order(typename BTree<T>::Ref tree, T const& v)
     {
         if(v < tree->item())
         {
-            ret_val = has_in_order(tree->left(), v);
+            ret_val=has_in_order(tree->left(), v);
         }
         else if(v > tree->item())
         {
-            ret_val = has_in_order(tree->right(), v);
+            ret_val=has_in_order(tree->right(), v);
         }
         else
         {
-            ret_val = true;
+            ret_val=true;
         }
     }
 
@@ -298,7 +300,7 @@ void insert_in_order(typename BTree<T>::Ref tree, T const& v)
     {
         tree->create_root(v);
     }
-    else if(v < tree->item())
+    else if (v < tree->item())
     {
         if(tree->left()->is_empty())
         {
@@ -306,10 +308,10 @@ void insert_in_order(typename BTree<T>::Ref tree, T const& v)
         }
         else
         {
-            insert_in_order(tree->left(), v);
+            insert_in_order(tree->left(),v);
         }
     }
-    else if(v > tree->item())
+    else if (v > tree->item())
     {
         if(tree->right()->is_empty())
         {
@@ -317,10 +319,9 @@ void insert_in_order(typename BTree<T>::Ref tree, T const& v)
         }
         else
         {
-            insert_in_order(tree->right(), v);
+            insert_in_order(tree->right(),v);
         }
     }
-
     assert(has_in_order<T>(tree, v));
 }
 

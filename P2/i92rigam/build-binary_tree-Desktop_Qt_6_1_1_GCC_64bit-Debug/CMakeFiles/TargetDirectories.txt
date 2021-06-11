@@ -1,0 +1,3 @@
+/home/marcos/Desktop/Practicas_ED/binary_tree/i92rigam/build-binary_tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/marcos/Desktop/Practicas_ED/binary_tree/i92rigam/build-binary_tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/marcos/Desktop/Practicas_ED/binary_tree/i92rigam/build-binary_tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_btree.dir
