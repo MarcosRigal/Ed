@@ -1,1 +1,0 @@
-/usr/bin/g++  -std=c++11 -Wall -g  -rdynamic CMakeFiles/test_dos_detector.dir/test_dos_detector.cpp.o CMakeFiles/test_dos_detector.dir/dos_detector.cpp.o  -o test_dos_detector 

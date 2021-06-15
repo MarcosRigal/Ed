@@ -1,0 +1,4 @@
+/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/build-alphabet_soup-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/build-alphabet_soup-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/build-alphabet_soup-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_alphabet_soup_solver.dir
+/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/build-alphabet_soup-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_trie.dir

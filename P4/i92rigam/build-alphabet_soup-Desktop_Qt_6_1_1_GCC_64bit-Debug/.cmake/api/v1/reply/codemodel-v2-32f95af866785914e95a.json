@@ -1,0 +1,68 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "alphabet_soup",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_alphabet_soup_solver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_alphabet_soup_solver-Debug-54b0a372adae95bd584d.json",
+					"name" : "test_alphabet_soup_solver",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_trie::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_trie-Debug-feccdb8e8fc691bb06a0.json",
+					"name" : "test_trie",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/build-alphabet_soup-Desktop_Qt_6_1_1_GCC_64bit-Debug",
+		"source" : "/home/marcos/Desktop/Practicas_ED/alphabet_soup/i92rigam/alphabet_soup"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

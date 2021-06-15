@@ -1,0 +1,5 @@
+/home/marcos/Desktop/Practicas_ED/avl-tree/i92rigam/build-avl-tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/marcos/Desktop/Practicas_ED/avl-tree/i92rigam/build-avl-tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_avltnode.dir
+/home/marcos/Desktop/Practicas_ED/avl-tree/i92rigam/build-avl-tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_bstree.dir
+/home/marcos/Desktop/Practicas_ED/avl-tree/i92rigam/build-avl-tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/test_avltree.dir
+/home/marcos/Desktop/Practicas_ED/avl-tree/i92rigam/build-avl-tree-Desktop_Qt_6_1_1_GCC_64bit-Debug/CMakeFiles/edit_cache.dir

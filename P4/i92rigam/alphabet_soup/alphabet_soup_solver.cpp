@@ -12,9 +12,10 @@
  * @param scan_result save the current chain. Is a pair of <word, cells_coordinates [row,col]>
  *
  */
-void scan_cell(int row, int col, int dy, int dx, AlphabetSoup const &soup,
-               TrieNode::Ref node,
-               ScanResult &scan_result)
+void
+scan_cell(int row, int col, int dy, int dx, AlphabetSoup const& soup,
+          TrieNode::Ref node,
+          ScanResult & scan_result)
 {
     //ALGORITHM
     //1. If this node is a leaf node (Leaf nodes has value != "").
@@ -28,11 +29,12 @@ void scan_cell(int row, int col, int dy, int dx, AlphabetSoup const &soup,
 
     if (node->value() != "")
     {
+        //Case 0: This node has a key value
         scan_result.first = node->value();
     }
     else
     {
-        if (row >= 0 && row < soup.rows() && col >= 0 && col < soup.cols())
+        if (row>=0 && row<soup.rows() && col>=0 && col<soup.cols())
         {
             auto const cell_v = soup.cell(row, col);
             if (node->has(cell_v))
@@ -43,64 +45,74 @@ void scan_cell(int row, int col, int dy, int dx, AlphabetSoup const &soup,
                 bool found = false;
                 if (dx == 0 && dy == 0)
                 {
+                    //TODO:
                     //Case 1: It is the first letter, so we must scan all eight
                     //neighbours, if possible, to find a word.
-                    for (int i = std::max(row - 1, 0); i < std::min(row + 2, soup.rows()) && !found; ++i)
-                        for (int j = std::max(col - 1, 0); j < std::min(col + 2, soup.cols()) && !found; ++j)
+                    for (int i = std::max(row-1, 0); i<std::min(row+2, soup.rows()) && !found; ++i)
+                        for (int j = std::max(col-1, 0); j< std::min(col+2, soup.cols()) && !found; ++j)
                         {
-                            if (i != row || j != col) //we don't want to scan the central cell again.
+                            if (i!=row || j!=col) //we don't want to scan the central cell again.
                             {
+                                //TODO
+                                //recursive call to scan_cell to scan for the
+                                //next letter in the direction dy=i-row, dx=j-col.
+                                scan_cell(row-1,col-1,-1,-1,soup,node,scan_result);
 
-                                scan_cell(row - 1, col - 1, -1, -1, soup, node, scan_result);
-
-                                if (scan_result.first == "")
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row - 1, col + 1, +1, -1, soup, node, scan_result);
+                                    scan_cell(row-1,col,0,-1,soup,node,scan_result);
                                 }
-
-                                if (scan_result.first == "")
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row - 1, col, 0, -1, soup, node, scan_result);
+                                    scan_cell(row-1,col+1,1,-1,soup,node,scan_result);
                                 }
-
-                                if (scan_result.first == "")
+                                ////////////////////////////////////////
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row, col + 1, +1, 0, soup, node, scan_result);
+                                    scan_cell(row,col-1,-1,0,soup,node,scan_result);
                                 }
-
-
-                                if (scan_result.first == "")
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row, col - 1, -1, 0, soup, node, scan_result);
+                                    scan_cell(row,col+1,1,0,soup,node,scan_result);
                                 }
-
-                                if (scan_result.first == "")
+                                //////////////////////////////
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row + 1, col + 1, +1, +1, soup, node, scan_result);
+                                    scan_cell(row+1,col-1,-1,1,soup,node,scan_result);
                                 }
-
-                                if (scan_result.first == "")
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row + 1, col, 0, +1, soup, node, scan_result);
+                                    scan_cell(row+1,col,0,1,soup,node,scan_result);
                                 }
-
-                                if (scan_result.first == "")
+                                if(scan_result.first == "")
                                 {
-                                    scan_cell(row + 1, col - 1, -1, +1, soup, node, scan_result);
+                                    scan_cell(row+1,col+1,1,1,soup,node,scan_result);
                                 }
-
+                                //
+                                //found a word?
                                 found = (scan_result.first != "");
                             }
                         }
                 }
                 else
                 {
-                    scan_cell(row + dx, col + dy, dy, dx, soup, node, scan_result);
+                    //TODO:
+                    //Case 2: It is middle letter, so we follow the scanning
+                    //direction (dx,dy) if we can.
+                    scan_cell(row+dx,col+dy,dy,dx,soup, node, scan_result);
+                    //
+                    //Found a word?
                     found = (scan_result.first != "");
                 }
                 if (found)
                 {
-                    scan_result.second.push(std::make_pair(row, col));
+                    //TODO
+                    //A word was found for this chain so push the current cell
+                    //coordinates pair <row,cols> into the
+                    //stack scan_result.second
+                    scan_result.second.push(std::make_pair(row,col));
+
+                    //
                 }
             }
             //else Case 3: This chain is not a valid key prefix.
@@ -109,14 +121,14 @@ void scan_cell(int row, int col, int dy, int dx, AlphabetSoup const &soup,
     }
 }
 
-std::vector<ScanResult>
-alphabet_soup_solver(AlphabetSoup &soup, std::vector<std::string> const &words)
+std::vector< ScanResult >
+alphabet_soup_solver(AlphabetSoup& soup, std::vector<std::string> const& words)
 {
-    std::vector<ScanResult> results;
+    std::vector< ScanResult > results;
     auto trie = Trie::create();
 
     //Generate a trie with the words to be found as keys.
-    for (size_t i = 0; i < words.size(); ++i)
+    for (size_t i = 0; i<words.size(); ++i)
         trie->insert(words[i]);
 
     //We scan all the soup to find a first letter of any key.
@@ -125,13 +137,14 @@ alphabet_soup_solver(AlphabetSoup &soup, std::vector<std::string> const &words)
         for (int col = 0; col < soup.cols(); ++col)
         {
             auto scan_result = std::make_pair(std::string(""),
-                                              std::stack<std::pair<int, int>>());
+                                              std::stack<std::pair<int,int>>());
             //Scan from this cell. This is the first letter so dx==dy==0.
             scan_cell(row, col, 0, 0, soup, trie->root(), scan_result);
-            if (scan_result.first != "")
-                //A word was found so save it into the results.
-                results.push_back(scan_result);
+            if (scan_result.first!="")
+              //A word was found so save it into the results.
+              results.push_back(scan_result);
         }
     }
     return results;
 }
+

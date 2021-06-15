@@ -1,5 +1,0 @@
-/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/CMakeFiles/edit_cache.dir
-/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/CMakeFiles/test_avltree.dir
-/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/CMakeFiles/test_bstree.dir
-/home/marcos/Repositories/University/Ed/P3/i92rigam/build-avl-tree-Desktop-Debug/CMakeFiles/test_avltnode.dir

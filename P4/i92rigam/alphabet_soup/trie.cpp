@@ -14,29 +14,31 @@
 inline void assert(bool assertion)
 {
 #ifndef NDEBUG
-    (void)((assertion) || (__assert("Assert violation!", __FILE__, __LINE__), 0));
+    (void)((assertion) || (__assert ("Assert violation!", __FILE__, __LINE__),0));
 #endif
 }
 
-TrieNode::TrieNode(){};
+
+TrieNode::TrieNode ()
+{
+};
 
 TrieNode::Ref TrieNode::create()
 {
     return std::make_shared<TrieNode>();
 }
 
-bool TrieNode::has(char k) const
+bool
+TrieNode::has(char k) const
 {
     bool ret_v = false;
-
-    for (auto iterator = children_.begin(); iterator != children_.end(); iterator++)
+    for(auto it = children_.begin(); ((it != children_.end()) && !ret_v); it++)
     {
-        if (iterator->first == k)
+        if(it->first == k)
         {
-            ret_v = true;
+            ret_v=true;
         }
     }
-
     return ret_v;
 }
 
@@ -46,13 +48,13 @@ TrieNode::child(char k) const
     assert(has(k));
     TrieNode::Ref ret_v;
 
-    auto children = children_;
-    ret_v = children[k];
+    auto child = children_;
+    ret_v=child[k];
 
     return ret_v;
 }
 
-std::string const &
+std::string const&
 TrieNode::value() const
 {
     return value_;
@@ -63,17 +65,23 @@ const std::map<char, TrieNode::Ref> &TrieNode::children() const
     return children_;
 }
 
-void TrieNode::set_value(std::string const &new_v)
+void
+TrieNode::set_value(std::string const& new_v)
 {
     value_ = new_v;
 }
 
-void TrieNode::insert(char k, Ref node)
+void
+TrieNode::insert(char k, Ref node)
 {
     children_.insert(std::make_pair(k, node));
 }
-
-Trie::Trie(){}
+  ////////////////////////////////////
+ ///  AQUI EMPIEZA LA CLASE TRIE  ///
+////////////////////////////////////
+Trie::Trie()
+{
+}
 
 Trie::Ref Trie::create()
 {
@@ -85,7 +93,8 @@ TrieNode::Ref Trie::root() const
     return root_;
 }
 
-bool Trie::has(std::string const &k) const
+bool
+Trie::has(std::string const& k) const
 {
     bool found = false;
 

@@ -1,4 +1,0 @@
-/home/marcos/Repositories/University/Ed/P5/i92rigam/build-dos_detector-Desktop-Debug/CMakeFiles/edit_cache.dir
-/home/marcos/Repositories/University/Ed/P5/i92rigam/build-dos_detector-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-/home/marcos/Repositories/University/Ed/P5/i92rigam/build-dos_detector-Desktop-Debug/CMakeFiles/test_dos_detector.dir
-/home/marcos/Repositories/University/Ed/P5/i92rigam/build-dos_detector-Desktop-Debug/CMakeFiles/test_hash_table.dir

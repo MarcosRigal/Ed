@@ -8,6 +8,16 @@
 #include "graph.hpp"
 #include "graph_utils.hpp"
 
+void road(size_t u, size_t v, IMatrix const& I, std::vector<size_t>& path)
+{
+ if(I[u][v]!=-1)
+ {
+     road(u,I[u][v],I,path);
+     path.push_back(I[u][v]);
+     road(I[u][v],v,I,path);
+ }
+}
+
 /**
  * @brief Compute the weight matrix.
  * @arg[in] g is a weighted graph.
@@ -16,14 +26,25 @@
 template<class T>
 void compute_weight_matrix(WGraph<T>& g, FMatrix& W)
 {
-    W = FMatrix(g.size(), g.size(),
-                std::numeric_limits<float>::infinity());
+    W = FMatrix(g.size(), g.size(), std::numeric_limits<float>::infinity());
 
-    //TODO: compute the WMatrix.
+    //: compute the WMatrix.
     //Hint: scan all the edges. Use the node.label() to index the matrix.
     //Hint: Assume the graph is directed.
     //Hint: Review how to move the cursors.
+    g.goto_first_node();
+    while (g.has_current_node())
+    {
+        while (g.has_current_edge())
+        {
+            auto first = g.current_edge()->first();
+            auto second = g.current_edge()->second();
 
+            W[first->label()][second->label()] = g.weight(first, second);
+            g.goto_next_edge();
+        }
+        g.goto_next_node();
+    }
 
     //
 }
@@ -48,9 +69,21 @@ void floyd_algorithm(WGraph<T>& g, FMatrix& D, IMatrix& I)
 
     I = IMatrix(g.size(), g.size(), -1);
 
-    //TODO: Codify the Floyd algorithm.
+    for(size_t i = 0; i < g.size(); i++)
+    {
+        for(size_t j = 0; j < g.size(); j++)
+        {
+            for(size_t k = 0; k < g.size(); k++)
+            {
+                if(D[j][k] > (D[j][i] + D[i][k]))
+                {
+                    D[j][k] = (D[j][i] + D[i][k]);
+                    I[j][k] = i;
+                }
+            }
+        }
 
-    //
+    }
 }
 
 /**
@@ -72,14 +105,9 @@ floyd_compute_path(size_t u, size_t v, IMatrix const& I,
     std::stack<std::pair<size_t, size_t>> s;
     path.resize(0);
 
-    //TODO: Find the path.
-    //Hint: Think first. Is it necessary to build a binary tree? or it
-    //is enough to do an in-depth search using an iterative approach with
-    //a stack of pairs (u->v).
-
-
-
-    //
+    path.push_back(u);
+    road(u, v, I, path);
+    path.push_back(v);
 }
 
 

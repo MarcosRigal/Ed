@@ -183,8 +183,6 @@ protected:
     void preorder_traversal(TrieNode::Ref const& node,
                             std::vector<std::string> & keys) const;
 
-    //TODO
     TrieNode::Ref root_;
-    //
 };
 

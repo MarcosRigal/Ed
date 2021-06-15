@@ -1,0 +1,11 @@
+# ninja log v5
+0	1598	1623501903816290829	CMakeFiles/test_floyd.dir/city.cpp.o	9f114396064301e0
+0	1976	1623501904192292293	CMakeFiles/test_floyd.dir/test_floyd.cpp.o	7334af175aaca32d
+1976	2112	1623501904328292823	test_floyd	99f5c5a01dafb9db
+1	1276	1623509428391185395	CMakeFiles/test_floyd.dir/test_floyd.cpp.o	7334af175aaca32d
+1276	1408	1623509428523185022	test_floyd	99f5c5a01dafb9db
+1	1511	1623521453640313916	CMakeFiles/test_floyd.dir/test_floyd.cpp.o	7334af175aaca32d
+1511	1640	1623521453768313393	test_floyd	99f5c5a01dafb9db
+1	1168	1623570884583367325	CMakeFiles/test_floyd.dir/city.cpp.o	9f114396064301e0
+1	1844	1623570885255354473	CMakeFiles/test_floyd.dir/test_floyd.cpp.o	7334af175aaca32d
+1844	2008	1623570885423351283	test_floyd	99f5c5a01dafb9db

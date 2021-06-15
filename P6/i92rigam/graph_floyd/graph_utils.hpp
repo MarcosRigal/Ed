@@ -198,12 +198,32 @@ std::shared_ptr<WGraph<T>> create_wgraph(std::istream &in) noexcept(false)
         return nullptr;
     graph = std::make_shared<WGraph<T>>(size);
 
-    //TODO: read the input file and build the graph.
+    //Read the input file and build the graph.
     //Hint: Review how to add new nodes, edges to the graph.
     //Renember if the graph is non directed, each edge u--v generate two
     //directed edges u-->v and v-->u.
     //If the input format is wrong, the throw std::runtime_error("Wrong graph").
-
+    T value;
+    for(size_t i = 0; i < size; i++)
+    {
+        in >> value;
+        graph->add_node(value);
+    }
+    size_t number_of_edges;
+    in >> number_of_edges;
+    T u,v;
+    float w;
+    for(size_t i = 0; i<number_of_edges; i++)
+    {
+        in>>u;
+        in>>v;
+        in>>w;
+        graph->set_weight(graph->find(u),graph->find(v),w);
+        if(!is_directed)
+        {
+            graph->set_weight(graph->find(v),graph->find(u),w);
+        }
+    }
 
     //
     return graph;
