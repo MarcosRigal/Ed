@@ -1,4 +1,6 @@
-![ED](https://www.stoodnt.com/blog/wp-content/uploads/2020/06/Best-Online-Courses-Algorithms-Data-Structures.jpg)
+<div align="center">
+    <img width="100%" src="https://www.stoodnt.com/blog/wp-content/uploads/2020/06/Best-Online-Courses-Algorithms-Data-Structures.jpg" alt="ED">
+</div>
 
 # Instructions:
 The practices are organized as follows:
